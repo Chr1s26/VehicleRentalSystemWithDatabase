@@ -41,9 +41,9 @@ public class MainTest {
 			
 			case 4: rentVehicles(); break;
 			
-//			case 5: saleReport(); break;
-//			 
-//			case 6: rentalService.displayRentVehicle(); break;
+			case 5: saleReport(); break;
+			 
+			case 6: showVehicle(); break;
 				
 			default:break;}
 		}while(number != 7);
@@ -51,24 +51,21 @@ public class MainTest {
 		System.out.println("Thank you for using the Car and Motorcycle Management System.GoodBye!");
 	}
 	
-//	public static void saleReport() {
-//		VehicleSaleReportService vehicleSaleReportService = new CarRentalService();
-//		VehicleSaleReportService vehicleSaleReportService2 = new CycleRentalService();
-//		vehicleSaleReportService.displaySaleReport();
-//		vehicleSaleReportService2.displaySaleReport();
-//	}
+	public static void saleReport() throws IOException {
+		VehicleSaleReportService vehicleSaleReportService = new CarRentalService();
+		VehicleSaleReportService vehicleSaleReportService2 = new CycleRentalService();
+		vehicleSaleReportService.displaySaleReport();
+		vehicleSaleReportService2.displaySaleReport();
+	}
 	
 	public static void rentVehicles() throws IOException {
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("Enter the type that you want to rent");
-		String type = bufferedReader.readLine();
-		if(type.equalsIgnoreCase("car")) {
+		if(getType().equalsIgnoreCase("car")) {
 			RentalService carRentalService = new CarRentalService();
-			carRentalService.rentVehicle(type);
+			carRentalService.rentVehicle();
 		}
 		else {
 			RentalService cycleRentalService = new CycleRentalService();
-			cycleRentalService.rentVehicle(type);
+			cycleRentalService.rentVehicle();
 		}
 	}
 	
@@ -80,6 +77,25 @@ public class MainTest {
 	public static void RegisterCycle() throws IOException {
 		VehicleRegisterationService cycleRegisterationService = new CycleRegisterationService();
 		cycleRegisterationService.addVehicle();
+	}
+	
+	public static String getType() throws IOException {
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Enter the type that you want to rent");
+		String type = bufferedReader.readLine();
+		return type;
+	}
+	
+	public static void showVehicle() throws IOException {
+		RentalService rentalService;
+		if(getType().equalsIgnoreCase("car")) {
+		    rentalService = new CarRentalService();
+			rentalService.DisplayVehicle();
+		}
+		else {
+			rentalService = new CycleRentalService();
+			rentalService.DisplayVehicle();
+		}
 	}
 
 

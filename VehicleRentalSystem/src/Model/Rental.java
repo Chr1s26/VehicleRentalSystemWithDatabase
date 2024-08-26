@@ -2,28 +2,24 @@ package Model;
 
 public class Rental {
 
-	private Car car;
-	private Cycle cycle;
+	private Vehicle vehicle;
 	private Customer customer;
 	private double rentDays;
 	private int rentalId;
 	private double totalPrice;
 	private static int rentCount = 0;
 	
-	public Rental(Car car,Customer customer,double rentDays,double totalPrice) {
-		this.car = car;
+	public Rental(Vehicle vehicle,Customer customer,double rentDays,double totalPrice) {
+		this.vehicle = vehicle;
 		this.customer = customer;
 		this.rentDays = rentDays;
 		this.totalPrice = totalPrice;
 	}
 	
-	public Rental(Cycle cycle,Customer customer,double rentDays,double totalPrice) {
-		this.cycle = cycle;
-		this.customer = customer;
+	public Rental(double rentDays,double totalPrice) {
 		this.rentDays = rentDays;
 		this.totalPrice = totalPrice;
 	}
-
 	
 	public Rental() {
 		rentCount++;
@@ -66,21 +62,14 @@ public class Rental {
 		return customer;
 	}
 
-
-	public Car getCar() {
-		return car;
+	public Vehicle getVehicle() {
+		return vehicle;
 	}
 
-	public void setCar(Car car) {
-		this.car = car;
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
-
-	public Cycle getCycle() {
-		return cycle;
-	}
-
-	public void setCycle(Cycle cycle) {
-		this.cycle = cycle;
-	}
+	
+	
 
 }

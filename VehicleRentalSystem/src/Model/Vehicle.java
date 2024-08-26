@@ -7,21 +7,22 @@ public class Vehicle {
 	private String licenseNumber;
 	private double rentalPrice;
 	private String type;
-	private boolean isAvailable = true;
+	private boolean isAvailable;
 	private static int count = 1;
 	
-	public Vehicle(String type,String model,String licenseNumber,double rentalPrice,boolean isAvailable) {
-		this.type = type;
+	public Vehicle(int id,String model,String licenseNumber,double rentalPrice,boolean isAvailable) {
+		this.id = id;
 		this.model = model;
 		this.licenseNumber = licenseNumber;
 		this.rentalPrice = rentalPrice;
 		this.isAvailable = true;
 	}
 	
-	public Vehicle(String model,String licenseNumber,double rentalPrice) {
+	public Vehicle(String model,String licenseNumber,double rentalPrice,boolean isAvailable) {
 		this.model = model;
 		this.licenseNumber = licenseNumber;
 		this.rentalPrice = rentalPrice;
+		this.isAvailable = isAvailable ;
 	}
 
 	public static int getCount() {
@@ -62,10 +63,9 @@ public class Vehicle {
 
 	@Override
 	public String toString() {
-		return ", model=" + model + ", licenseNumber=" + licenseNumber + ", rentalPrice="
-				+ rentalPrice ;
+		return " [id=" + id + ", model=" + model + ", licenseNumber=" + licenseNumber + ", rentalPrice="
+				+ rentalPrice + ", isAvailable=" + isAvailable;
 	}
-	
 	
 	
 }

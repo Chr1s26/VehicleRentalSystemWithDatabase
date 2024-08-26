@@ -16,11 +16,11 @@ private CarDaoImp carDaoImp;
 		
 	
 	@Override
-	public void getTypeInfo(String model,String number,double price) throws IOException {
+	public Vehicle getTypeInfo(String model,String number,double price) throws IOException {
 		System.out.println("Enter the number of seats : ");
 		int seats = Integer.parseInt(bufferedReader.readLine());
-		Car car = new Car(model,number,price, seats);
-		carDaoImp.addCarModel(car);
+		Vehicle car = new Car(model,number,price, true ,seats);
+		return car;
 		}
 	
 }

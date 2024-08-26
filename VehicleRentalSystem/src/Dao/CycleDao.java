@@ -8,7 +8,7 @@ public interface CycleDao {
 
 	void addCycleModel(Cycle cycle);
 	Cycle getCycleModelByLicenseNumber(String name);
-//	void deleteCycleModelByLicenseNumber(String license);
+	int getCycleCount();
 	List<Cycle> getAllCycles();
 
 }

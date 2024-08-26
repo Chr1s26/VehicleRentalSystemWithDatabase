@@ -22,13 +22,14 @@ public class CarDaoImp implements CarDao{
 
 	@Override
 	public void addCarModel(Car car) {
-		String sql = "INSERT INTO CARS (model,licenseNumber,rentalPrice,numOfSeats) VALUES (?,?,?,?)";
+		String sql = "INSERT INTO CARS (model,licenseNumber,rentalPrice,numOfSeats,isAvaliable) VALUES (?,?,?,?,?)";
 		try(Connection connection = connectionFactory.createConnection()) {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, car.getModel());
 			preparedStatement.setString(2, car.getLicenseNumber());
 			preparedStatement.setDouble(3, car.getRentalPrice());
 			preparedStatement.setInt(4, car.getNumOfSeats());
+			preparedStatement.setBoolean(5, car.isAvailable());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -50,7 +51,8 @@ public class CarDaoImp implements CarDao{
 				String licenseNumber = resultSet.getString("licenseNumber");
 				double rentalPrice = resultSet.getDouble("rentalPrice");
 				int numOfSeats = resultSet.getInt("numOfSeats");
-				car = new Car(id,model, licenseNumber, rentalPrice, numOfSeats);
+				boolean isAvailable = resultSet.getBoolean("isAvaliable");
+				car = new Car(id,model, licenseNumber, rentalPrice,isAvailable,numOfSeats);
 			}
 			
 		} catch (SQLException e) {
@@ -72,12 +74,32 @@ public class CarDaoImp implements CarDao{
 				String licenseNumber = resultSet.getString("licenseNumber");
 				double rentalPrice = resultSet.getDouble("rentalPrice");
 				int numOfSeats = resultSet.getInt("numOfSeats");
-				cars.add(new Car(id,model, licenseNumber, rentalPrice, numOfSeats));
+				boolean isAvailable = resultSet.getBoolean("isAvaliable");
+				cars.add(new Car(id,model, licenseNumber, rentalPrice,isAvailable ,numOfSeats));
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return cars;
+	}
+	
+	@Override
+	public int getCarCount() {
+	    String sql = "SELECT COUNT(*) FROM CARS";
+	    int carCount = 0;
+
+	    try (Connection connection = connectionFactory.createConnection()) {
+	        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+	        ResultSet resultSet = preparedStatement.executeQuery();
+	        
+	        if (resultSet.next()) {
+	            carCount = resultSet.getInt(1);  
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return carCount;
 	}
 
 	

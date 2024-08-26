@@ -15,18 +15,18 @@ import Model.Vehicle;
 
 public abstract class RentalService extends BaseService {
 	
-	private VehicleDao vehicleDao;
 	private CustomerDao customerDao;
 	private RentalDao rentalDao;
 	private Rental rental;
 	   
 	public RentalService() {
-		vehicleDao = new VehicleDaoImp();
 		customerDao = new CustomerDaoImp();
 		rentalDao = new RentalDaoImp();
 	}
+	
+	
 
-	public void rentVehicle(String type) throws IOException {
+	public void rentVehicle() throws IOException {
 		rental = new Rental();
 		this.displayCustomer();
 		this.selectCustomer();
@@ -34,20 +34,22 @@ public abstract class RentalService extends BaseService {
 		this.selectVehicle();
 		this.selectRentInfo();
 		
-		this.rentalDao.create(rental,type);
+		this.rentalDao.rentVehicle(rental);
 		System.out.println("do you want to rent another vehicle");
 		
 		String flag = bufferedReader.readLine();
 			if(flag.equalsIgnoreCase("Yes")) {
-				this.rentVehicle(type);
+				this.rentVehicle();}
 			}
-		}
+	
+	
 		
 	public void displayCustomer() {
 		List<Customer> customers = customerDao.getAllCustomer();
 		for(Customer customer: customers) {
 			System.out.println(customer);}
 		}
+	
 	
 	
 	public void selectCustomer() throws IOException {
@@ -59,13 +61,10 @@ public abstract class RentalService extends BaseService {
 		        this.rental.setCustomer(customer);
 		    } else {
 		        System.out.println("Customer not found.");
-		        this.selectCustomer();
-		    }
+		        this.selectCustomer();}
 	}
 	
-	public abstract void DisplayVehicle();
 	
-	public abstract void selectVehicle () throws IOException;
 	
 	public void selectRentInfo() throws IOException{
 		System.out.println("Enter the number of days you want to rent");
@@ -74,8 +73,20 @@ public abstract class RentalService extends BaseService {
 		this.calculatetotalPrice();
 	}
 	
+	
+	public abstract void DisplayVehicle();
+	
+	public abstract void selectVehicle () throws IOException;
+	
 	public abstract void calculatetotalPrice();
-
+	
+	
+	
+	
+	
+	
+	
+	
 	public Rental getRental() {
 		return rental;
 	}

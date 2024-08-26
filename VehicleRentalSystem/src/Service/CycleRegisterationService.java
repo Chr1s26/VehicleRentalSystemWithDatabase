@@ -6,6 +6,7 @@ import Dao.CarDaoImp;
 import Dao.CycleDao;
 import Dao.CycleDaoImp;
 import Model.Cycle;
+import Model.Vehicle;
 
 public class CycleRegisterationService extends VehicleRegisterationService {
 	
@@ -16,9 +17,9 @@ private CycleDaoImp cycleDaoImp;
 	}
 
 	@Override
-	public void getTypeInfo(String model, String number, double price) throws IOException {
-		Cycle cycle = new Cycle(model, number, price);
-		cycleDaoImp.addCycleModel(cycle);
+	public Vehicle getTypeInfo(String model, String number, double price) throws IOException {
+		Vehicle cycle = new Cycle(model, number, price, true);
+		return cycle;
 	}
 
 	

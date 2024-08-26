@@ -6,7 +6,10 @@ import Model.Rental;
 
 public interface RentalDao {
 
-	void create(Rental rental,String type);
-//	List<Rental> getAllRentals();
+	void rentVehicle(Rental rental);
+	int getCarRentalCount();
+	int getCycleRentalCount();
+	List<Rental> getAllCarRentals();
+	List<Rental> getAllCycleRentals();
 
 }

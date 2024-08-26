@@ -21,6 +21,7 @@ public class CustomerDaoImp implements CustomerDao {
 		this.connectionFactory = new MySQLConnectionFactory();
 	}
 	
+	
 	@Override
 	public void createCustomer(Customer customer) {
 		String sql = "INSERT INTO CUSTOMERS (name) VALUES (?)";
@@ -34,7 +35,6 @@ public class CustomerDaoImp implements CustomerDao {
 	}
 	
 	
-
 	@Override
 	public Customer findCustomerByName(String name) {
 		String sql = "SELECT * FROM CUSTOMERS WHERE NAME = ?";
@@ -54,6 +54,7 @@ public class CustomerDaoImp implements CustomerDao {
 		return customer;
 	}
 
+	
 	@Override
 	public List<Customer> getAllCustomer(){
 		String sql = "SELECT * FROM CUSTOMERS ";
